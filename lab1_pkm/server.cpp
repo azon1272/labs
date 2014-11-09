@@ -23,36 +23,12 @@ public:
         string out ="";
         int min;
         int max;
-        int mid;
         int count =0;
         //string res[1024]; 
         string result;
         string temp="";
-      /*  for(int i=0;i<=input.length();i++)
-        {
-            cout<<"*";
-            if (input[i]!=' '|| input[i]!='\0' || input[i]!=';')
-            //if (input[i]!='\0' || ';' ||',')
-            {
-                temp+=input[i];
-                cout<<"=";
-                //cout<<i;cout<<'\n';
-            }
-            else
-            {
-                cout<<".";
-                temp+='\0';
-                //temp="56";
-          //      cout<<temp;
-          //      cout<<"--------------------\n";
-                numb_arr[count] = atoi(temp.c_str());
-                cout<<numb_arr[0];
-          //      cout<<numb_arr[count];
-          //      cout<<"+++\n";
-                temp ="";
-                count++;
-            }
-        }*/
+        float mid;
+        int summ=0;
         for (int i =0; i<=input.length();i++)
         {
             if (input[i]==' '|| input[i]=='\0')
@@ -98,10 +74,13 @@ public:
             {
                 max = numb_arr[j];
             }
+            summ += numb_arr[j];
          //   count++;
         }
+        mid = summ/count;
         //cout << min;
         result = IntToString(min);
+        result+=" "+IntToString(max)+" "+IntToString(mid);
         cout<<result;
         //sprintf(result,"%d",min);
         //result = itoa(min,res,10);
@@ -120,61 +99,7 @@ public:
       return oss.str();
     }
 };
-/*
-class work
-{
-public:
-string vijener(string in, string kay)
-{
-        string alf="AaEeIiOoUuBbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz123456789 ";
-	string out="";
-        int mk=0;
-        int l=0;
-        int lengthk=kay.length();
-        int lengtha=alf.length();
-	for(int i=0; i<in.length();i++)
-	{
-                if(lengthk>l)
-                {
-  			mk=valkay(kay,l);
-			l++;
-		}
-		else
-		{
-			l=0;
-		}
-		for(int j=0; j<lengtha;j++)
-		{
-			if(in[i]==alf[j])
-			{
-				if((mk+j)<lengtha)
-				{		
-					out+=alf[j+mk];
-				}
-                        	else
-				{
-					
-					out+=alf[(j+mk)-lengtha];
-				}
-			}
-		}
-	}
-        return out+'\n';
-}
-int valkay(string kays, int n)
-{
-	int k=0;
- 	string alf="AaEeIiOoUuBbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz123456789 ";
-	for(int j=0; j<alf.length(); j++)
-	{
-		if(alf[j]==kays[n])
-		{
-			k=j;
-		}
-	}
-   	return k;
-}
-};*/
+
 int main()
 {
 
@@ -216,12 +141,8 @@ int main()
         bytes_read = recv(sock, buf, 1024, 0);
         buf[bytes_read] = '\0';
         answer = a.calcul(buf);
-        //answer=a.vijener(buf,keyy);
-        //mesgmy=new char[answer.size()];
         copy(answer.begin(), answer.end(), mesgmy);
         mesgmy[answer.size()] = '\0';
-        //cout<<mesgmy;
-        //cout<<buf;
         sleep(1);    
         connect(socknext, (struct sockaddr *)&addrnext, sizeof(addrnext));
         send(socknext,mesgmy, sizeof(mesgmy), 0);
