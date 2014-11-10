@@ -37,6 +37,10 @@ content: none;
 {
   margin:1% 33.3% 0 33.3%;
 }
+.example_video
+{
+  max-width:900px;
+}
 .example_beauty
 {
   max-width:900px;
