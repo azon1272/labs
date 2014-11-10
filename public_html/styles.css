@@ -27,9 +27,10 @@ a.menu:after, .dropdown-toggle:after {
 content: none;
 }
 
-      .example3 {
+.example3 {
     display:inline-block;   
     position:relative;
+    margin:1% 25% 0 25%;
 }
 .example3 .example_text {
     display:block;
