@@ -77,10 +77,15 @@ public:
             summ += numb_arr[j];
          //   count++;
         }
-        mid = summ/count;
-        //cout << min;
+        cout<<"\n\nsumm=";
+        cout << summ;
+        cout<<"\n\ncount=";
+        cout << count;        
+        mid = (float)summ/(float)count;
+        cout<<"\n\n";
+        cout << mid;
         result = IntToString(min);
-        result+=" "+IntToString(max)+" "+IntToString(mid);
+        result+=" "+IntToString(max)+" "+FloatToString(mid);
         cout<<result;
         //sprintf(result,"%d",min);
         //result = itoa(min,res,10);
@@ -98,6 +103,36 @@ public:
       // Return the underlying string
       return oss.str();
     }
+    std::string FloatToString ( float number )
+    {
+      std::ostringstream oss;
+
+      // Works just like cout
+      oss<< number;
+
+      // Return the underlying string
+      return oss.str();
+    }
+    /*std::string FloatToString ( float number )
+    {
+              cout<<'\n';
+      cout<<number;
+      cout<<"\n\n\n\n";
+      std::ostringstream oss;
+      std::ostringstream oss1;
+      float test = number;
+      // Works just like cout
+      int a = (int)test;
+
+      float b = (number-a)*;
+      cout<<"b=";
+      cout<<b;
+      cout<<'\n';
+      oss<<a;
+      oss1<<b;
+      // Return the underlying string
+      return oss.str()+'.'+oss1.str();
+    }*/
 };
 
 int main()
