@@ -24,8 +24,8 @@ class myclass
         addr.sin_family = AF_INET;
         addr.sin_port = htons(3488);
         //addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-        inet_aton("127.0.0.1", &addr.sin_addr);
-        addr.sin_addr.s_addr =inet_addr("127.0.0.1");
+        inet_aton("127.0.0.1", &addr.sin_addr);//server_address
+        addr.sin_addr.s_addr =inet_addr("127.0.0.1");//server_address
         connect(sock, (struct sockaddr *)&addr, sizeof(addr));
         send(sock, msg1, sizeof(msg1), 0);
         send(sock, ms, sizeof(ms), 0);
@@ -49,10 +49,10 @@ class mynext
      		perror("socket");
            } 
  	  struct sockaddr_in addrnext;
-          inet_aton("127.0.0.1", &addrnext.sin_addr);
+          inet_aton("127.0.0.1", &addrnext.sin_addr);//client
           addrnext.sin_family = AF_INET;
           addrnext.sin_port = htons(3435);
-          addrnext.sin_addr.s_addr = inet_addr("127.0.0.1");
+          addrnext.sin_addr.s_addr = inet_addr("127.0.0.1");//client
            if(bind(socknext, (struct sockaddr *)&addrnext, sizeof(addrnext)) < 0)
     	   {
         		perror("bind");

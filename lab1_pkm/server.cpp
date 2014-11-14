@@ -113,26 +113,6 @@ public:
       // Return the underlying string
       return oss.str();
     }
-    /*std::string FloatToString ( float number )
-    {
-              cout<<'\n';
-      cout<<number;
-      cout<<"\n\n\n\n";
-      std::ostringstream oss;
-      std::ostringstream oss1;
-      float test = number;
-      // Works just like cout
-      int a = (int)test;
-
-      float b = (number-a)*;
-      cout<<"b=";
-      cout<<b;
-      cout<<'\n';
-      oss<<a;
-      oss1<<b;
-      // Return the underlying string
-      return oss.str()+'.'+oss1.str();
-    }*/
 };
 
 int main()
@@ -158,12 +138,12 @@ int main()
     } 
     addr.sin_family = AF_INET;
     addr.sin_port =htons(3488);
-    inet_aton("127.0.0.1", &addr.sin_addr); 
-    addr.sin_addr.s_addr =inet_addr ("127.0.0.1");
+    inet_aton("192.168.103.12", &addr.sin_addr); //out_address
+    addr.sin_addr.s_addr =inet_addr ("192.168.101.199");//server_address
     addrnext.sin_family = AF_INET;
-    inet_aton("127.0.0.1", &addrnext.sin_addr); 
+    inet_aton("192.168.103.12", &addrnext.sin_addr); //client_address
     addrnext.sin_port = htons(3435);
-    addrnext.sin_addr.s_addr =inet_addr("127.0.0.1");
+    addrnext.sin_addr.s_addr =inet_addr("192.168.103.12");//client_address
     if(bind(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0)
     {
         perror("bind");
