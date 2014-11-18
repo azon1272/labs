@@ -1,0 +1,214 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Lab 4">
+<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.js" type="text/javascript"></script>
+<script type='text/javascript' src='js/Lab_4.js'></script>
+<link href="../assets/css/bootstrap.css" rel="stylesheet">
+<link href="../assets/css/font-awesome.css" rel="stylesheet">
+<script type="text/javascript">
+//Добавить категорию
+$(document).ready( function (){
+    $('#add_category').on('click', function (){ 
+        $('#myModal').modal('show');
+        $('#add_category_modal').show();
+        $('#add_sub_category_modal').hide();
+    });
+//Добавить категорию (Модальное окно)
+    $('#add_category_modal').on('click', function (){ 
+        var text = $('#text_edit').val();
+        //alert(text);
+        var a_cats = $('.category.active');
+        //var container =  a_cats.length ? a_cats.eq(0).parent() : $( '.cats' );
+        $('.cont').append( '<div class="panel panel-default"><div class="panel-body category">'+text+'</div></div>' );
+    });
+//Добавить под категорию
+    $('#add_sub_category').on('click', function (){ 
+        $('#myModal').modal('show');
+        $('#add_sub_category_modal').show();
+        $('#add_category_modal').hide();
+    });
+//Добавить под категорию (Модальное окно)
+    $('#add_sub_category_modal').on('click', function (){ 
+        var text = $('#text_edit').val();
+        var a_cats = $('.category.active');
+        var container =  a_cats.length ? a_cats.eq(0).parent() : $( '.cats' );
+        var sub_list = container.children('ul');
+        if ( sub_list.length ){
+            container = sub_list.eq(0);
+        }
+        else{
+            container.append('<ul></ul>');
+            container = container.children('ul');
+        }
+        container.append( '<div class="panel panel-default"><div class="panel-body category">'+text+'</div></div>' );
+    });
+//Удалить
+    $('#del_category').on('click', function (){ 
+        var a_cats = $('.category.active');
+        if ( a_cats.length ){
+            a_cats.eq(0).parent().remove();
+        }
+        else{
+            return;
+        }
+    });
+
+    $(document).on('click', '.category', function (){ //По нажатию на категорию
+        //$('.category').click(function(){ //Не работает !!!
+        $('#add_category').show();
+        $('#add_sub_category').show();
+
+        $('.category').removeClass('active');
+        $('.category').removeClass('sel-category');
+        //Встановить класс Active
+        $(this).addClass('active'); 
+        //Выделение красным
+        $(this).addClass('sel-category'); 
+    })
+    
+    $(document).on('click' , '.cats ul .category', function (){ //По нажатию на под категорию
+        //$('.cats ul .category').click(function(){ //Не работает !!!
+        $('#add_category').hide();
+        //$('#add_sub_category').hide();
+
+        $('.up,.down').remove();
+        $(this).append("<button class='btn btn-link down'><font color='white'><i style='width:0px' class='fa fa-arrow-down'></i></font></button><button class='btn btn-link up'><font color='white'><i style='width:0px' class='fa fa-arrow-up'></i></font></button>");
+    });
+
+    $(document).on('click', '.up', function (){ //Стрелка Верх
+        var element = $(this).closest('li'); //Возвращает родительский елемент
+        var cl = element.clone(); //Клонирует елемент
+        var prev = element.prev(); //Получает превидущий елемент
+        if (prev.length){ //Если ниже есть еше елемент
+            element.remove(); //Удаляет старый
+            prev.before(cl); //Перемещает
+        }
+    });
+
+    $(document).on('click', '.down', function (){ //Стрелка Вниз
+        var element = $(this).closest('li'); //Возвращает родительский елемент
+        var cl = element.clone(); //Клонирует елемент
+        var next = element.next(); //Получает следующий елемент
+        if (next.length){ //Если выше есть еше елемент
+		      
+            element.remove(); //Удаляет старый
+            next.after(cl); //Перемещает
+        }
+    });
+
+});
+</script>
+
+</head>
+<title>Lab 4</title>
+<body>
+
+<style>
+body{
+//font-size: 25px;
+margin: 0px;
+
+background-attachment: fixed;
+}
+
+#most{
+  font-size: 10px;
+  display: none;
+}
+
+#logo{
+  text-align: center;
+  color: black;
+}
+
+a.category{
+text-decoration: none;
+font-weight: bold;
+background:#FFCCFF;
+
+}
+
+#buttons{
+text-align: right;
+margin-bottom: 50px;
+}
+
+#field{
+  position: static;
+  //left: 40%;
+  right: 0px;
+  top: 60px;
+  margin: 20px;
+  width: 650px;
+  padding: 20px;
+  //border-left: 1px solid #e5e5e5;
+
+}
+
+.sel-category{
+background:#FFCCFF;
+}
+
+#add_sub_category,#add_sub_category_modal,#add_category_modal{
+  display:none; 
+}
+
+
+</style>
+
+<h1 id="logo">Лабораторная работа №4 Дарнапук Євген</h1>
+
+<hr>
+
+<div id='field'>
+<button id="add_category" style="color: white;" class="btn btn-primary">Додати категорію </button>
+<button id="add_sub_category" style="color: black;" class="btn btn-success"> Додати підкатегорію</button>
+<button id="del_category" style="color: black;" class="btn btn-default">Видалити</button>
+<div class="cont">
+  <div class="panel panel-default">
+    <div class="panel-body category" id=1 >Категорія 1</div>
+  </div><br>
+  <div class="panel panel-default">
+    <div class="panel-body category" id=2 >Категорія 2</div>
+  </div><br>
+  <div class="panel panel-default">
+    <div class="panel-body category" id=3 >Категорія 3</div>
+  </div><br>
+</div>
+
+</div>            
+
+<!-- Button trigger modal 
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Modal
+</button>-->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+        <h4 class="modal-title" id="myModalLabel">Додати:</h4>
+      </div>
+      <div class="modal-body">
+        <input id="text_edit" type="text" placeholder="Введіть коментар" value="Жгучий коммент" style="width: 100%;">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Вихід</button>
+        <button id='add_category_modal' type="button" data-dismiss="modal" class="btn btn-primary">Додати</button>
+
+        <button id='add_sub_category_modal' type="button" data-dismiss="modal" class="btn btn-primary">Додати</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>
